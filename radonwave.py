@@ -75,7 +75,7 @@ def connect_and_read(device_address):
 
 def main():
 	parser = ArgumentParser()
-	parser.add_argument('--us', help='Use measurement units common in the United States. '
+	parser.add_argument('--us', action="store_true", help='Use measurement units common in the United States. '
 		'Temperature is in degrees Fahrenheit and radon level is in picocuries per liter.')
 	parser.add_argument('--wait', default=1200, type=int,
 		help='Seconds to wait between queries. Do not choose this too low as the '
