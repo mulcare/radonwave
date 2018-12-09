@@ -97,7 +97,7 @@ def main():
 				measurement.temperature = (measurement.temperature * (9/5)) + 32
 				measurement.radon_avg = measurement.radon_avg / 37
 				measurement.radon_1day = measurement.radon_1day / 37
-			print('{time}\t{temperature:.2f}\t{humidity:.2f}\t{radon_avg}\t{radon_1day}\t{accel:04X}\t{humidity2:.2f}'.format(
+			print('{time}\t{temperature:.2f}\t{humidity:.2f}\t{radon_avg:.2f}\t{radon_1day:.2f}\t{accel:04X}\t{humidity2:.2f}'.format(
 				time=time.strftime('%Y-%m-%d %H:%M:%S'),
 				**vars(measurement)
 				), sep='\t')
