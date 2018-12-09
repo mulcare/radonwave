@@ -75,6 +75,8 @@ def connect_and_read(device_address):
 
 def main():
 	parser = ArgumentParser()
+	parser.add_argument('--us', help='Use measurement units common in the United States. '
+		'Temperature is in degrees Fahrenheit and radon level is in picocuries per liter.')
 	parser.add_argument('--wait', default=1200, type=int,
 		help='Seconds to wait between queries. Do not choose this too low as the '
 		'radon levels are only updated once every 60 minutes. Default: 1200 '
@@ -91,6 +93,10 @@ def main():
 		except btle.BTLEException as e:
 			print('Bluetooth error:', e, file=sys.stderr)
 		else:
+			if args.us:
+				measurement.temperature = (measurement.temperature * (9/5)) + 32
+				measurement.radon_avg = measurement.radon_avg / 37
+				measurement.radon_1day = measurement.radon_1day / 37
 			print('{time}\t{temperature:.2f}\t{humidity:.2f}\t{radon_avg}\t{radon_1day}\t{accel:04X}\t{humidity2:.2f}'.format(
 				time=time.strftime('%Y-%m-%d %H:%M:%S'),
 				**vars(measurement)
